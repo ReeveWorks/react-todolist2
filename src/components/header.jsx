@@ -4,6 +4,9 @@ function header() {
 
   return (
     <>
+      <header className="header">
+        <h1>Welcome to MyWebsite</h1>
+      </header>
     </>
   )
 }
