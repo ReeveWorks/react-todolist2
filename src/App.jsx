@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './styles/app.css'
 import Header from './components/header.jsx'
 import TodoList from './components/todolist.jsx'
 import Footer from './components/footer.jsx'
@@ -7,11 +8,11 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <Header/>
-      <TodoList/>
-      <Footer/>
-    </>
+    <div className="ctr-app">
+      <div className='ctr-header'><Header/></div>
+      <div className='ctr-todolist'><TodoList/></div>
+      <div className='ctr-footer'><Footer/></div>
+    </div>
   )
 }
 
