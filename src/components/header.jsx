@@ -1,11 +1,9 @@
-import '../styles/header.css'
-
 function header() {
 
   return (
     <>
       <header className="header">
-        <h1>Welcome to MyWebsite</h1>
+        <h1>My To-Do List</h1>
       </header>
     </>
   )

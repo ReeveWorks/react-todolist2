@@ -5,12 +5,10 @@ function todolist() {
   return (
     <>
       <div className="todolist">
-        <h2>My To-Do List</h2>
-        <ul>
-          <li>Learn React</li>
-          <li>Build a To-Do App</li>
-          <li>Deploy the App</li>
-        </ul>
+        <p>Item 1</p>
+        <p>Item 2</p>
+        <p>Item 3</p>
+        <p>Item 4</p>
       </div>
     </>
   )
