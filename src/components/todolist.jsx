@@ -3,17 +3,17 @@ import { useState } from 'react';
 
 function todolist() {
 
-  const [lists, setList] = useState("Item 0");
+  const [tasks, setTasks] = useState(['Item 1', 'Item 2', 'Item 3']);
   const [item, setItem] = useState("");
 
   function InputChange(event) {
     setItem(event.target.value);
   }
 
-  function addItem() {
+  function addTask() {
     if(item.trim() === "") return;
 
-    setList(item);
+    setTasks(item);
     setItem("");
   }
 
@@ -25,14 +25,20 @@ function todolist() {
           value={item} 
           onChange={InputChange}
           placeholder="Add new task..." />
-        <button onClick={() => addItem()}>
+        <button onClick={() => addTask()}>
           Add
         </button>
-        <p>{lists}</p>
-        <p>Item 1</p>
-        <p>Item 2</p>
-        <p>Item 3</p>
-        <p>Item 4</p>
+
+        <ol>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              <span>{task}</span>
+              <button>
+                Delete
+              </button>
+              </li>
+          ))}
+        </ol>
       </div>
     </>
   )
