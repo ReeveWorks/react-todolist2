@@ -1,12 +1,10 @@
 import '../styles/todolist.css'
 import { useState, useContext } from 'react';
-import { TasksContext } from './TaskContext';
+import { TasksContext } from '../contexts/tasksContext.jsx';
 
 function todolist() {
-  const [tasks, setTasks] = useState(['Item 1', 'Item 2', 'Item 3']);
   const [item, setItem] = useState("");
-  const todoHolder = useContext(TasksContext);
-  console.log(todoHolder.todo);
+  const {todo, setTodo} = useContext(TasksContext);
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -15,7 +13,7 @@ function todolist() {
   function addTask() {
     if (item.trim() === "") return;
 
-    setTasks([...tasks, item]);
+    setTodo([...todo, item]);
     setItem("");
   }
 
@@ -32,7 +30,7 @@ function todolist() {
         </button>
 
         <ol>
-          {tasks.map((task, index) => (
+          {todo.map((task, index) => (
           <li key={index}>
             <span>{task}</span>
 
