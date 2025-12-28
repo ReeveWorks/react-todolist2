@@ -17,6 +17,11 @@ function todolist() {
     setItem("");
   }
 
+  function deleteTask(index) {
+    const newTodo = todo.filter((_, i) => i !== index);
+    setTodo(newTodo);
+  }
+
   return (
     <>
       <div className="todolist">
@@ -34,7 +39,7 @@ function todolist() {
           <li key={index}>
             <span>{task}</span>
 
-            <button>
+            <button onClick={() => deleteTask(index)}>
               🗑️
             </button>
             <button>
