@@ -1,0 +1,33 @@
+html, body, #root {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.ctr-app{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.ctr-todolist{
+    flex: 1;
+    text-align: center;
+}
+
+.ctr-header {
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0px;
+    padding: 0px;
+}
+
+.ctr-footer {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0px;
+    padding: 0px;
+}
