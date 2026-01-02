@@ -1,14 +1,14 @@
 import '../styles/todolist.css'
 import { useState, useContext } from 'react';
 import { TasksContext } from '../contexts/tasksContext.jsx';
-import { useTodos } from '../contexts/todos.jsx';
+//import { useTodos } from '../contexts/todos.jsx';
 
 function todolist() {
   const [item, setItem] = useState("");
   const {todo, setTodo} = useContext(TasksContext);
-
-  const tasks = useTodos((state) => state.tasks)
-  const setTasks = useTodos((state) => state.setTasks)
+  
+  // const tasks = useTodos((state) => state.tasks)
+  // const setTasks = useTodos((state) => state.setTasks)
 
   function InputChange(event) {
     setItem(event.target.value);
