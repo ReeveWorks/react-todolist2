@@ -1,15 +1,14 @@
 import '../styles/todolist.css'
 import { useState, useContext } from 'react';
 import { TasksContext } from '../contexts/tasksContext.jsx';
-import { useTodos } from '../contexts/todos.jsx';
+import { useTodosStore } from '../store/todoItems.jsx';
 
 function todolist() {
   const [item, setItem] = useState("");
   const {todo, setTodo} = useContext(TasksContext);
   
-  const tasks = useTodos((state) => state.tasks)
-  const setTasks = useTodos((state) => state.setTasks)
-  const addTaskStore = useTodos((state) => state.addTask)
+  // const tasks = useTodosStore((state) => state.tasks);
+  const {tasks, setTasks} = useTodosStore();
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -44,7 +43,7 @@ function todolist() {
           <li key={index}>
             <span>{task}</span>
 
-            <button onClick={() => addTaskStore(index)}>
+            <button onClick={() => deleteTask(index)}>
               🗑️
             </button>
             <button>
