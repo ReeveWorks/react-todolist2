@@ -7,8 +7,18 @@ function todolist() {
   const [item, setItem] = useState("");
   const {todo, setTodo} = useContext(TasksContext);
   
-  // const tasks = useTodosStore((state) => state.tasks);
-  const {tasks, setTasks} = useTodosStore();
+  /* Zustand Store Option 1*/
+  const tasks = useTodosStore((state) => state.tasks);
+  const setTasks = useTodosStore((state) => state.setTasks);
+  
+  /* Zustand Store Option 2*/
+  // const {tasks, setTasks} = useTodosStore((state) => ({
+  // tasks: state.tasks,
+  // setTasks: state.setTasks,
+  // }));
+
+  /* Zustand Store Option 3*/
+  // const {tasks, setTasks} = useTodosStore();
 
   function InputChange(event) {
     setItem(event.target.value);
