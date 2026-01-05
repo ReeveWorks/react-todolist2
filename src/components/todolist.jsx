@@ -5,6 +5,7 @@ import { useTodosStore } from '../store/todoItems.jsx';
 
 function todolist() {
   const [item, setItem] = useState("");
+  const [weight, setWeight] = useState(0);
   const {todo, setTodo} = useContext(TasksContext);
   
   /* Zustand Store Option 1*/
@@ -23,11 +24,19 @@ function todolist() {
   function InputChange(event) {
     setItem(event.target.value);
   }
+  
+  function WeightChange(event) {
+    if (event.target.value < 0) return;
+    if (event.target.value > 100) return;
+    if (event.target.value.includes('.')) return;
+
+    setWeight(event.target.value);
+  }
 
   function addTask() {
     if (item.trim() === "") return;
 
-    setTasks([...tasks, item]);
+    setTodo([...todo, item]);
     setItem("");
   }
 
@@ -39,17 +48,28 @@ function todolist() {
   return (
     <>
       <div className="todolist">
+        {/* Add new task */}
         <input
           type="text"
           value={item}
           onChange={InputChange}
           placeholder="Add new task..." />
+        <input
+          type="number"
+          value={weight}
+          onChange={WeightChange}
+          placeholder="set weight"
+          step='1'
+          min='0'
+          max='100'/>
+
+
         <button onClick={() => addTask()}>
           Add
         </button>
 
         <ol>
-          {tasks.map((task, index) => (
+          {todo.map((task, index) => (
           <li key={index}>
             <span>{task}</span>
 
