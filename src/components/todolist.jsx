@@ -6,12 +6,12 @@ import { useTodosStore } from '../store/todoItems.jsx';
 function todolist() {
   const [item, setItem] = useState("");
   const [weight, setWeight] = useState(0);
-  const {todo, setTodo} = useContext(TasksContext);
-  
+  const { todo, setTodo } = useContext(TasksContext);
+
   /* Zustand Store Option 1*/
   const tasks = useTodosStore((state) => state.tasks);
   const setTasks = useTodosStore((state) => state.setTasks);
-  
+
   /* Zustand Store Option 2*/
   // const {tasks, setTasks} = useTodosStore((state) => ({
   // tasks: state.tasks,
@@ -24,7 +24,7 @@ function todolist() {
   function InputChange(event) {
     setItem(event.target.value);
   }
-  
+
   function WeightChange(event) {
     if (event.target.value < 0) return;
     if (event.target.value > 100) return;
@@ -35,14 +35,16 @@ function todolist() {
 
   function addTask() {
     if (item.trim() === "") return;
+    if (weight == 0) return;
 
-    setTodo([...todo, item]);
+    setTasks([...tasks, {task: item, weight: Number(weight)}]);
     setItem("");
+    setWeight(0);
   }
 
   function deleteTask(index) {
-    const newTodo = todo.filter((_, i) => i !== index);
-    setTodo(newTodo);
+    const newTasks = tasks.filter((_, i) => i !== index);
+    setTasks(newTasks);
   }
 
   return (
@@ -61,7 +63,7 @@ function todolist() {
           placeholder="set weight"
           step='1'
           min='0'
-          max='100'/>
+          max='100' />
 
 
         <button onClick={() => addTask()}>
@@ -69,20 +71,14 @@ function todolist() {
         </button>
 
         <ol>
-          {todo.map((task, index) => (
-          <li key={index}>
-            <span>{task}</span>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              <span>{task.task}</span>
 
-            <button onClick={() => deleteTask(index)}>
-              🗑️
-            </button>
-            <button>
-              △
-            </button>
-            <button>
-              ▽
-            </button>
-          </li>
+              <b>{task.weight}&nbsp;</b>
+              <button>✓</button>
+              <button onClick={() => deleteTask(index)}>✕</button>
+            </li>
           ))}
         </ol>
       </div>
@@ -91,3 +87,18 @@ function todolist() {
 }
 
 export default todolist
+
+        // <ol>
+        //   {([...tasks].sort((a, b) => b.weight - a.weight)).map((task) => {
+        //     const originalIndex = tasks.indexOf(task);
+        //     return (
+        //       <li key={originalIndex}>
+        //         <span>{task.task}</span>
+
+        //         <b>{task.weight}&nbsp;</b>
+        //         <button>✓</button>
+        //         <button onClick={() => deleteTask(originalIndex)}>✕</button>
+        //       </li>
+        //     );
+        //   })}
+        // </ol>

@@ -7,9 +7,9 @@ import { create } from "zustand";
 
 const useTodosStore = create((set) => ({
   tasks: [
-    {tasks: "Learn Zustand", weight: 10},
-    {tasks: "Build a Todo App", weight: 38},
-    {tasks: "Profit", weight: 15},
+    {task: "Learn Zustand", weight: 10},
+    {task: "Build a Todo App", weight: 38},
+    {task: "Profit", weight: 15},
   ],
   addTodo: (newTask) => set((state) => ({ tasks: [...state.tasks, newTask] })),
   setTasks: (newTasks) => set({ tasks: newTasks}),
