@@ -12,15 +12,6 @@ function todolist() {
   const tasks = useTodosStore((state) => state.tasks);
   const setTasks = useTodosStore((state) => state.setTasks);
 
-  /* Zustand Store Option 2*/
-  // const {tasks, setTasks} = useTodosStore((state) => ({
-  // tasks: state.tasks,
-  // setTasks: state.setTasks,
-  // }));
-
-  /* Zustand Store Option 3*/
-  // const {tasks, setTasks} = useTodosStore();
-
   function InputChange(event) {
     setItem(event.target.value);
   }
@@ -37,7 +28,12 @@ function todolist() {
     if (item.trim() === "") return;
     if (weight == 0) return;
 
-    setTasks([...tasks, {task: item, weight: Number(weight)}]);
+    setTasks([...tasks, 
+      {
+        id: tasks[tasks.length -1].id +1,
+        task: item, 
+        weight: Number(weight)
+      }]);
     setItem("");
     setWeight(0);
   }
@@ -73,7 +69,7 @@ function todolist() {
         <ol>
           {tasks.map((task, index) => (
             <li key={index}>
-              <span>{task.task}</span>
+              <span>{task.task} | {task.id}</span>
 
               <b>{task.weight}&nbsp;</b>
               <button>✓</button>
@@ -87,6 +83,17 @@ function todolist() {
 }
 
 export default todolist
+        /* <ol>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              <span>{task.task}</span>
+
+              <b>{task.weight}&nbsp;</b>
+              <button>✓</button>
+              <button onClick={() => deleteTask(index)}>✕</button>
+            </li>
+          ))}
+        </ol>
 
         // <ol>
         //   {([...tasks].sort((a, b) => b.weight - a.weight)).map((task) => {
@@ -102,3 +109,12 @@ export default todolist
         //     );
         //   })}
         // </ol>
+
+        /* Zustand Store Option 2*/
+        // const {tasks, setTasks} = useTodosStore((state) => ({
+        // tasks: state.tasks,
+        // setTasks: state.setTasks,
+        // }));
+
+        /* Zustand Store Option 3*/
+        // const {tasks, setTasks} = useTodosStore();
