@@ -1,12 +1,11 @@
 import '../styles/todolist.css'
 import { useState, useContext } from 'react';
-import { TasksContext } from '../contexts/tasksContext.jsx';
+// import { TasksContext } from '../contexts/tasksContext.jsx';
 import { useTodosStore } from '../store/todoItems.jsx';
 
 function todolist() {
   const [item, setItem] = useState("");
   const [weight, setWeight] = useState(0);
-  const { todo, setTodo } = useContext(TasksContext);
 
   /* Zustand Store Option 1*/
   const tasks = useTodosStore((state) => state.tasks);
@@ -18,7 +17,7 @@ function todolist() {
 
   function WeightChange(event) {
     if (event.target.value < 0) return;
-    if (event.target.value > 100) return;
+    if (event.target.value > 10) return;
     if (event.target.value.includes('.')) return;
 
     setWeight(event.target.value);
@@ -28,18 +27,18 @@ function todolist() {
     if (item.trim() === "") return;
     if (weight == 0) return;
 
-    setTasks([...tasks, 
-      {
-        id: tasks[tasks.length -1].id +1,
-        task: item, 
-        weight: Number(weight)
-      }]);
+    setTasks([...tasks,
+    {
+      id: Number(tasks[tasks.length - 1].id + 1),
+      task: item,
+      weight: Number(weight)
+    }]);
     setItem("");
     setWeight(0);
   }
 
   function deleteTask(index) {
-    const newTasks = tasks.filter((_, i) => i !== index);
+    const newTasks = tasks.filter(t => t.id !== index);
     setTasks(newTasks);
   }
 
@@ -61,21 +60,28 @@ function todolist() {
           min='0'
           max='100' />
 
-
         <button onClick={() => addTask()}>
           Add
         </button>
 
         <ol>
-          {tasks.map((task, index) => (
-            <li key={index}>
-              <span>{task.task} | {task.id}</span>
+          {
+            (
+              [...tasks].sort((a, b) => b.weight - a.weight).map
+                (
+                  (task) =>
+                  (
+                    <li key={task.id}>
+                      <span>{task.task}</span>
 
-              <b>{task.weight}&nbsp;</b>
-              <button>✓</button>
-              <button onClick={() => deleteTask(index)}>✕</button>
-            </li>
-          ))}
+                      <b>{task.weight}&nbsp;</b>
+                      <button>✓</button>
+                      <button onClick={() => deleteTask(task.id)}>✕</button>
+                    </li>
+                  )
+                )
+            )
+          }
         </ol>
       </div>
     </>
@@ -83,38 +89,40 @@ function todolist() {
 }
 
 export default todolist
-        /* <ol>
-          {tasks.map((task, index) => (
-            <li key={index}>
-              <span>{task.task}</span>
+// const { todo, setTodo } = useContext(TasksContext);
 
-              <b>{task.weight}&nbsp;</b>
-              <button>✓</button>
-              <button onClick={() => deleteTask(index)}>✕</button>
-            </li>
-          ))}
-        </ol>
+{/* <ol>
+  {tasks.map((task, index) => (
+    <li key={index}>
+      <span>{task.task}</span>
 
-        // <ol>
-        //   {([...tasks].sort((a, b) => b.weight - a.weight)).map((task) => {
-        //     const originalIndex = tasks.indexOf(task);
-        //     return (
-        //       <li key={originalIndex}>
-        //         <span>{task.task}</span>
+      <b>{task.weight}&nbsp;</b>
+      <button>✓</button>
+      <button onClick={() => deleteTask(index)}>✕</button>
+    </li>
+  ))}
+</ol> */}
 
-        //         <b>{task.weight}&nbsp;</b>
-        //         <button>✓</button>
-        //         <button onClick={() => deleteTask(originalIndex)}>✕</button>
-        //       </li>
-        //     );
-        //   })}
-        // </ol>
+// <ol>
+//   {([...tasks].sort((a, b) => b.weight - a.weight)).map((task) => {
+//     const originalIndex = tasks.indexOf(task);
+//     return (
+//       <li key={originalIndex}>
+//         <span>{task.task}</span>
 
-        /* Zustand Store Option 2*/
-        // const {tasks, setTasks} = useTodosStore((state) => ({
-        // tasks: state.tasks,
-        // setTasks: state.setTasks,
-        // }));
+//         <b>{task.weight}&nbsp;</b>
+//         <button>✓</button>
+//         <button onClick={() => deleteTask(originalIndex)}>✕</button>
+//       </li>
+//     );
+//   })}
+// </ol>
 
-        /* Zustand Store Option 3*/
-        // const {tasks, setTasks} = useTodosStore();
+/* Zustand Store Option 2*/
+// const {tasks, setTasks} = useTodosStore((state) => ({
+// tasks: state.tasks,
+// setTasks: state.setTasks,
+// }));
+
+/* Zustand Store Option 3*/
+// const {tasks, setTasks} = useTodosStore();
