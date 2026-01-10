@@ -31,7 +31,8 @@ function todolist() {
     {
       id: Number(tasks[tasks.length - 1].id + 1),
       task: item,
-      weight: Number(weight)
+      weight: Number(weight), 
+      status: false
     }]);
     setItem("");
     setWeight(0);
@@ -40,6 +41,11 @@ function todolist() {
   function deleteTask(index) {
     const newTasks = tasks.filter(t => t.id !== index);
     setTasks(newTasks);
+  }
+
+  function SetComplete(index) {
+    // const newTasks = tasks.filter(t => t.id !== index);
+    // setTasks(newTasks);
   }
 
   return (
@@ -75,7 +81,7 @@ function todolist() {
                       <span>{task.task}</span>
 
                       <b>{task.weight}&nbsp;</b>
-                      <button>✓</button>
+                      <button onClick={() => SetComplete(task.id)}>✓</button>
                       <button onClick={() => deleteTask(task.id)}>✕</button>
                     </li>
                   )
