@@ -29,7 +29,7 @@ function todolist() {
 
     setTasks([...tasks,
     {
-      id: Number(tasks[tasks.length - 1].id + 1),
+      id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
       task: item,
       weight: Number(weight), 
       status: false
@@ -43,9 +43,8 @@ function todolist() {
     setTasks(newTasks);
   }
 
-  function SetComplete(index) {
-    // const newTasks = tasks.filter(t => t.id !== index);
-    // setTasks(newTasks);
+  function toggleStatus(index) {
+    setTasks(tasks.map(t => t.id === index ? {...t, status: !t.status} : t));
   }
 
   return (
@@ -72,21 +71,34 @@ function todolist() {
 
         <ol>
           {
-            (
-              [...tasks].sort((a, b) => b.weight - a.weight).map
-                (
-                  (task) =>
-                  (
-                    <li key={task.id}>
-                      <span>{task.task}</span>
+            tasks
+              .filter(i => !i.status)
+              .sort((a, b) => b.weight - a.weight)
+              .map((task) => (
+                <li key={task.id}>
+                  <span>{task.task}</span>
 
-                      <b>{task.weight}&nbsp;</b>
-                      <button onClick={() => SetComplete(task.id)}>✓</button>
-                      <button onClick={() => deleteTask(task.id)}>✕</button>
-                    </li>
-                  )
-                )
-            )
+                  <b>{task.weight}&nbsp;</b>
+                  <button onClick={() => toggleStatus(task.id)}>✓</button>
+                  <button onClick={() => deleteTask(task.id)}>✕</button>
+                </li>
+              ))
+          }
+        </ol>
+        <ol>
+          {
+            tasks
+              .filter(i => i.status)
+              .sort((a, b) => b.weight - a.weight)
+              .map((task) => (
+                <li key={task.id}>
+                  <span>{task.task}</span>
+
+                  <b>{task.weight}&nbsp;</b>
+                  <button onClick={() => toggleStatus(task.id)}>↺</button>
+                  <button onClick={() => deleteTask(task.id)}>✕</button>
+                </li>
+              ))
           }
         </ol>
       </div>
