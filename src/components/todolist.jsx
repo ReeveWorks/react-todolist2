@@ -50,7 +50,6 @@ function todolist() {
   return (
     <>
       <div className="todolist">
-        {/* Add new task */}
         <input
           type="text"
           value={item}
@@ -107,40 +106,3 @@ function todolist() {
 }
 
 export default todolist
-// const { todo, setTodo } = useContext(TasksContext);
-
-{/* <ol>
-  {tasks.map((task, index) => (
-    <li key={index}>
-      <span>{task.task}</span>
-
-      <b>{task.weight}&nbsp;</b>
-      <button>✓</button>
-      <button onClick={() => deleteTask(index)}>✕</button>
-    </li>
-  ))}
-</ol> */}
-
-// <ol>
-//   {([...tasks].sort((a, b) => b.weight - a.weight)).map((task) => {
-//     const originalIndex = tasks.indexOf(task);
-//     return (
-//       <li key={originalIndex}>
-//         <span>{task.task}</span>
-
-//         <b>{task.weight}&nbsp;</b>
-//         <button>✓</button>
-//         <button onClick={() => deleteTask(originalIndex)}>✕</button>
-//       </li>
-//     );
-//   })}
-// </ol>
-
-/* Zustand Store Option 2*/
-// const {tasks, setTasks} = useTodosStore((state) => ({
-// tasks: state.tasks,
-// setTasks: state.setTasks,
-// }));
-
-/* Zustand Store Option 3*/
-// const {tasks, setTasks} = useTodosStore();
