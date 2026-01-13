@@ -1,10 +1,5 @@
 import { create } from "zustand";
 
-// type TodoStore = {
-//   tasks: string,
-//   weight: number,
-// };
-
 const useTodosStore = create((set) => ({
   tasks: [
     {id: 1, task: "Learn Zustand", weight: 4, status: false},
