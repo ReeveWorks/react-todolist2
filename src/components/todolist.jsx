@@ -64,11 +64,11 @@ function todolist() {
           min='0'
           max='100' />
 
-        <button onClick={() => addTask()}>
+        <button className='btn-Add' onClick={() => addTask()}>
           Add
         </button>
 
-        <ol>
+        <ol className='lst-task'>
           {
             tasks
               .filter(i => !i.status)
@@ -84,7 +84,7 @@ function todolist() {
               ))
           }
         </ol>
-        <ol>
+        <ol className='lst-completed'>
           {
             tasks
               .filter(i => i.status)
