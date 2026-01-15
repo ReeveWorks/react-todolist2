@@ -75,9 +75,9 @@ function todolist() {
               .sort((a, b) => b.weight - a.weight)
               .map((task) => (
                 <li key={task.id}>
+                  <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
 
-                  <b>{task.weight}&nbsp;</b>
                   <button onClick={() => toggleStatus(task.id)}>✓</button>
                   <button onClick={() => deleteTask(task.id)}>✕</button>
                 </li>
@@ -91,9 +91,9 @@ function todolist() {
               .sort((a, b) => b.weight - a.weight)
               .map((task) => (
                 <li key={task.id}>
+                  <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
 
-                  <b>{task.weight}&nbsp;</b>
                   <button onClick={() => toggleStatus(task.id)}>↺</button>
                   <button onClick={() => deleteTask(task.id)}>✕</button>
                 </li>
