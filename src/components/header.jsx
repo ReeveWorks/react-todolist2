@@ -1,3 +1,5 @@
+import '../styles/global.css'
+
 function header() {
 
   return (

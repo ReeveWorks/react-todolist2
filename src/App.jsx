@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import './styles/global.css'
 import './styles/app.css'
 import Header from './components/header.jsx'
 import TodoList from './components/todolist.jsx'
 import Footer from './components/footer.jsx'
 import { TasksProvider } from './contexts/tasksContext.jsx'
+import { useState } from 'react'
 
 function App() {
   const [count, setCount] = useState(0)

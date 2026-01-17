@@ -1,3 +1,4 @@
+import '../styles/global.css'
 import { useEffect, useRef, useContext } from "react";
 import { TasksContext } from '../contexts/tasksContext.jsx';
 import { useTodosStore } from '../store/todoItems.jsx';

@@ -2,7 +2,6 @@ html, body, #root {
     height: 100%;
     margin: 0px;
     padding: 0px;
-  --secondary-color: rgb(7, 5, 15);
 }
 
 .ctr-app{
