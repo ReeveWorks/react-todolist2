@@ -5,3 +5,6 @@ export const store = configureStore({
     // Add your reducers here
   },
 });
+
+export const RootState = ReturnType(store.getState);
+export const AppDispatch = store.dispatch;

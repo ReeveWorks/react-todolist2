@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface CounterState {
-  value: number;
-}
+/**
+ * @typedef {Object} CounterState
+ * @property {number} value
+ */
 
-const initialState: CounterState = {
+/** @type {CounterState} */
+const initialState = {
   value: 0,
 };
 
