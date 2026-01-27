@@ -3,7 +3,7 @@ import '../styles/todolist.css'
 import { useState, useContext } from 'react';
 import { TasksContext } from '../contexts/tasksContext.jsx';
 
-function todolist() {
+function todolistContext() {
   const [item, setItem] = useState("");
   const {todo, setTodo} = useContext(TasksContext);
 
@@ -57,4 +57,4 @@ function todolist() {
   )
 }
 
-export default todolist
+export default todolistContext
