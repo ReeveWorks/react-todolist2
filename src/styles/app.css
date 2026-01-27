@@ -20,14 +20,14 @@ html, body, #root {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--secondary-color);
     margin: 0px;
     padding: 0px;
 }
 
 .ctr-footer {
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--secondary-color);
     margin: 0px;
     padding: 0px;
 }

@@ -1,10 +1,9 @@
 import '../styles/global.css'
 import '../styles/todolist.css'
-import { useState, useContext } from 'react';
-// import { TasksContext } from '../contexts/tasksContext.jsx';
+import { useState } from 'react';
 import { useTodosStore } from '../store/todoItems.jsx';
 
-function todolist() {
+function todolistZustand() {
   const [item, setItem] = useState("");
   const [weight, setWeight] = useState(0);
 
@@ -106,4 +105,4 @@ function todolist() {
   )
 }
 
-export default todolist
+export default todolistZustand
