@@ -13,11 +13,18 @@ function App() {
 
   return (
     <div className="ctr-app">
-      <Provider store={store}>
-        <div className='ctr-header'><Header/></div>
+      <div className='ctr-header'><Header/></div>
+
+      {/* <TasksProvider.Provider>
         <div className='ctr-todolist'><TodoList/></div>
-        <div className='ctr-footer'><Footer/></div>
+      </TasksProvider.Provider> */}
+
+      {/* redux management system */}
+      <Provider store={store}>
+        <div className='ctr-todolist'><TodoList/></div>
       </Provider>
+      
+      <div className='ctr-footer'><Footer/></div>
     </div>
   )
 }
