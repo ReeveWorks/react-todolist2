@@ -7,6 +7,7 @@ import { TasksProvider } from './contexts/tasksContext.jsx'
 import { useState } from 'react'
 import {Provider} from 'react-redux'
 import {store} from './state/store.jsx'
+import todolistZustand from './components/todo-zustand.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,8 @@ function App() {
       {/* <TasksProvider.Provider>
         <div className='ctr-todolist'><TodoList/></div>
       </TasksProvider.Provider> */}
+
+      {/* <div className='ctr-todolist'><todolistZustand/></div> */}
 
       {/* redux management system */}
       <Provider store={store}>
