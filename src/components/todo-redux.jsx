@@ -1,12 +1,17 @@
+import { toggletask } from '../state/todolist/todoSlice';
 import '../styles/global.css'
 import '../styles/todolist.css'
 import { useState } from 'react';
-import {useSelector}  from 'react-redux';
+import {useSelector, useDispatch}  from 'react-redux';
 
 function todolist() {
-    const tasks = useSelector((state) => state.todos.todos);
-  
+  const tasks = useSelector((state) => state.todos.todos);
+  const dispatch = useDispatch();
 
+  function toggleStatus(index) {
+    dispatch(toggletask(index));
+  }
+  
   return (
     <>
       <div className="todolist">
@@ -20,7 +25,7 @@ function todolist() {
                   <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
 
-                  <button>✓</button>
+                  <button onClick={() => toggleStatus(task.id)}>✓</button>
                   <button>✕</button>
                 </li>
               ))
@@ -36,7 +41,7 @@ function todolist() {
                   <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
 
-                  <button>✓</button>
+                  <button onClick={() => toggleStatus(task.id)}>↺</button>
                   <button>✕</button>
                 </li>
               ))
