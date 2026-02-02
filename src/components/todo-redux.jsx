@@ -1,4 +1,4 @@
-import { toggletask } from '../state/todolist/todoSlice';
+import { toggletask, deletetask } from '../state/todolist/todoSlice';
 import '../styles/global.css'
 import '../styles/todolist.css'
 import { useState } from 'react';
@@ -12,6 +12,10 @@ function todolist() {
     dispatch(toggletask(index));
   }
   
+  function deleteTask(index) {
+    dispatch(deletetask(index));
+  }
+
   return (
     <>
       <div className="todolist">
@@ -26,7 +30,7 @@ function todolist() {
                   <span>{task.task}</span>
 
                   <button onClick={() => toggleStatus(task.id)}>✓</button>
-                  <button>✕</button>
+                  <button onClick={() => deleteTask(task.id)}>✕</button>
                 </li>
               ))
           }
@@ -42,7 +46,7 @@ function todolist() {
                   <span>{task.task}</span>
 
                   <button onClick={() => toggleStatus(task.id)}>↺</button>
-                  <button>✕</button>
+                  <button onClick={() => deleteTask(task.id)}>✕</button>
                 </li>
               ))
           }
