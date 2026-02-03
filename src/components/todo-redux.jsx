@@ -31,7 +31,12 @@ function todolist() {
   }
 
   function addTask() {
-    dispatch(addtask(item));
+    if (item.trim() === "") return;
+    if (weight == 0) return;
+    dispatch(addtask({
+      task: item,
+      weight: Number(weight)
+    }));
 
     setItem("");
     setWeight(0);

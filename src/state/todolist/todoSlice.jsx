@@ -15,7 +15,13 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     addtask : (state, action) => {
-      state.todos.push(action.payload);
+      const newtask = {
+        id: state.todos[state.todos.length - 1] + 1,
+        task: action.payload.task,
+        weight: action.payload.weight,
+        status: false
+      }
+      state.todos.push(newtask);
     },
     deletetask : (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
