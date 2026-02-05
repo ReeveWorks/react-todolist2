@@ -11,6 +11,7 @@ li{
 a{
     list-style-type: none;
     display: flex;
+    cursor: pointer;
     font-size: 20px;
     gap: 15px;
     margin: 0px 5px 0px 5px;
@@ -20,7 +21,7 @@ a{
 a.selected{
     font-weight: bold;
     color: var(--main-color);
-    border: 2px solid rebeccapurple;
+    border: 3.5px solid rebeccapurple;
 }
 
 h1{
