@@ -3,7 +3,7 @@ import '../styles/todolist.css'
 import { useState, useContext } from 'react';
 import { TasksContext } from '../contexts/tasksContext.jsx';
 
-function todolistContext() {
+function TodoListContext() {
   const [item, setItem] = useState("");
   const {todo, setTodo} = useContext(TasksContext);
 
@@ -31,7 +31,7 @@ function todolistContext() {
           value={item}
           onChange={InputChange}
           placeholder="Add new task..." />
-        <button onClick={() => addTask()}>
+        <button className='btn-Add' onClick={() => addTask()}>
           Add
         </button>
 
@@ -57,4 +57,4 @@ function todolistContext() {
   )
 }
 
-export default todolistContext
+export default TodoListContext

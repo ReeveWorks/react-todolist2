@@ -31,3 +31,11 @@ html, body, #root {
     margin: 0px;
     padding: 0px;
 }
+
+.off{
+    content-visibility: hidden;
+}
+
+.selected{
+    content-visibility: visible;
+}

@@ -3,33 +3,37 @@ import './styles/app.css'
 import Header from './components/header.jsx'
 import Footer from './components/footer.jsx'
 import { useState } from 'react'
-import {Provider} from 'react-redux'
-import {store} from './state/store.jsx'
+import { Provider } from 'react-redux'
+import { store } from './state/store.jsx'
 import { TasksProvider } from './contexts/tasksContext.jsx'
+import { usePageStore } from './store/pageStore.jsx';
 
 import TodoList from './components/todolist.jsx'
-import todolistZustand from './components/todo-zustand.jsx'
+import TodoListContext from './components/todo-context.jsx'
+import TodoListZustand from './components/todo-zustand.jsx'
 import TodoListRedux from './components/todo-redux.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const page = usePageStore((state) => state.page);
+  
   return (
     <div className="ctr-app">
-      <div className='ctr-header'><Header/></div>
+      <div className='ctr-header'><Header /></div>
 
-      {/* <TasksProvider.Provider>
-        <div className='ctr-todolist'><TodoList/></div>
-      </TasksProvider.Provider> */}
+      {/* UseContext Hook management system */}
+      <TasksProvider >
+        <div className={page.selected === "Context" ? 'ctr-todolist' : 'off'}><TodoListContext /></div>
+      </TasksProvider>
 
-      {/* <div className='ctr-todolist'><todolistZustand/></div> */}
+      {/* Zustand management system */}
+      <div className={page.selected === "Zustand" ? 'ctr-todolist' : 'off'}><TodoListZustand /></div>
 
       {/* redux management system */}
       <Provider store={store}>
-        <div className='ctr-todolist'><TodoListRedux/></div>
+        <div className={page.selected === "Redux" ? 'ctr-todolist' : 'off'}><TodoListRedux /></div>
       </Provider>
-      
-      <div className='ctr-footer'><Footer/></div>
+
+      <div className='ctr-footer'><Footer /></div>
     </div>
   )
 }
