@@ -5,7 +5,7 @@ import { TasksContext } from '../contexts/tasksContext.jsx';
 
 function TodoListContext() {
   const [item, setItem] = useState("");
-  const {todo, setTodo} = useContext(TasksContext);
+  const {todo, setTodo, addTodo} = useContext(TasksContext);
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -14,9 +14,10 @@ function TodoListContext() {
   function addTask() {
     if (item.trim() === "") return;
 
-    setTodo([...todo, item]);
+    addTodo(item);
     setItem("");
   }
+  
 
   function deleteTask(index) {
     const newTodo = todo.filter((_, i) => i !== index);
@@ -36,9 +37,10 @@ function TodoListContext() {
         </button>
 
         <ol>
-          {todo.map((task, index) => (
+          {todo.map((todo, index) => (
           <li key={index}>
-            <span>{task}</span>
+            <span>{todo.task}</span>
+            <span>{todo.id}</span>
 
             <button onClick={() => deleteTask(index)}>
               🗑️
