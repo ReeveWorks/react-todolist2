@@ -15,9 +15,14 @@ export const TasksProvider = ({ children }) => {
   function addTodo(task) {
     setTodo([...todo, { id: todo[todo.length - 1].id + 1, task, status: false }]);
   }
+  function toggleTodo(task) {
+    setTodo(todo.map((todo) => 
+      todo.id === task ? { ...todo, status: !todo.status } : todo
+    ));
+  }
 
   return (
-    <TasksContext.Provider value={{ todo, addTodo, setTodo }}>
+    <TasksContext.Provider value={{ todo, addTodo, setTodo, toggleTodo }}>
       {children}
     </TasksContext.Provider>
   );

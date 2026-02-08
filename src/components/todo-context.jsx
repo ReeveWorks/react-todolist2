@@ -5,7 +5,7 @@ import { TasksContext } from '../contexts/tasksContext.jsx';
 
 function TodoListContext() {
   const [item, setItem] = useState("");
-  const {todo, setTodo, addTodo} = useContext(TasksContext);
+  const { todo, setTodo, addTodo, toggleTodo } = useContext(TasksContext);
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -16,12 +16,6 @@ function TodoListContext() {
 
     addTodo(item);
     setItem("");
-  }
-  
-
-  function deleteTask(index) {
-    const newTodo = todo.filter((_, i) => i !== index);
-    setTodo(newTodo);
   }
 
   return (
@@ -36,23 +30,43 @@ function TodoListContext() {
           Add
         </button>
 
-        <ol>
-          {todo.map((todo, index) => (
-          <li key={index}>
-            <span>{todo.task}</span>
-            <span>{todo.id}</span>
+        <ol className="lst-task">
+          {
+            todo
+              .filter(i => !i.status)
+              .sort((a, b) => a.id - b.id)
+              .map((todo) => (
+                <li key={todo.id}>
+                  <b>{todo.id}&nbsp;</b>
+                  <span>{todo.task}</span>
 
-            <button onClick={() => deleteTask(index)}>
-              🗑️
-            </button>
-            <button>
-              △
-            </button>
-            <button>
-              ▽
-            </button>
-          </li>
-          ))}
+
+                  <button onClick={() => toggleTodo(todo.id)}>✓</button>
+                  <button onClick={() => deleteTask(todo.id)}>✕</button>
+                  <button>△</button>
+                  <button>▽</button>
+                </li>
+              ))
+          }
+        </ol>        
+        <ol className='lst-completed'>
+          {
+            todo
+              .filter(i => i.status)
+              .sort((a, b) => a.id - b.id)
+              .map((todo) => (
+                <li key={todo.id}>
+                  <b>{todo.id}&nbsp;</b>
+                  <span>{todo.task}</span>
+
+
+                  <button onClick={() => toggleTodo(todo.id)}>↺</button>
+                  <button onClick={() => deleteTask(todo.id)}>✕</button>
+                  <button>△</button>
+                  <button>▽</button>
+                </li>
+              ))
+          }
         </ol>
       </div>
     </>
