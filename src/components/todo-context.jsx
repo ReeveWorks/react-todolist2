@@ -5,7 +5,7 @@ import { TasksContext } from '../contexts/tasksContext.jsx';
 
 function TodoListContext() {
   const [item, setItem] = useState("");
-  const { todo, setTodo, addTodo, toggleTodo, moveUp, moveDown } = useContext(TasksContext);
+  const { todo, setTodo, addTodo, toggleTodo, moveUp, moveDown, deleteTask } = useContext(TasksContext);
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -43,8 +43,8 @@ function TodoListContext() {
 
                   <button onClick={() => toggleTodo(todo.id)}>✓</button>
                   <button onClick={() => deleteTask(todo.id)}>✕</button>
-                  <button onClick={() => moveUp(todo.id)}>△</button>
-                  <button onClick={() => moveDown(todo.id)}>▽</button>
+                  <button onClick={() => moveUp(todo)}>△</button>
+                  <button onClick={() => moveDown(todo)}>▽</button>
                 </li>
               ))
           }
@@ -62,8 +62,8 @@ function TodoListContext() {
 
                   <button onClick={() => toggleTodo(todo.id)}>↺</button>
                   <button onClick={() => deleteTask(todo.id)}>✕</button>
-                  <button onClick={() => moveUp(todo.id)}>△</button>
-                  <button onClick={() => moveDown(todo.id)}>▽</button>
+                  <button onClick={() => moveUp(todo)}>△</button>
+                  <button onClick={() => moveDown(todo)}>▽</button>
                 </li>
               ))
           }

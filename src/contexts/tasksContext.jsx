@@ -13,8 +13,13 @@ export const TasksProvider = ({ children }) => {
   ]);
 
   function addTodo(task) {
-    todo.push({ id: todo[todo.length - 1].id + 1, task, status: false });
+    todo.push({ id: Math.max(...todo.map(o => o.id)) + 1, task, status: false });
   }
+
+  function deleteTask(task) {
+    setTodo(todo.filter(t => t.id != task));
+  }
+  
   function toggleTodo(task) {
     setTodo(todo.map((todo) => 
       todo.id === task ? { ...todo, status: !todo.status } : todo
@@ -22,23 +27,29 @@ export const TasksProvider = ({ children }) => {
   }
 
   function moveUp(task) {
-    if (task === 1) return; // Can't move up the first item
+    const selectedTask = todo.filter(i => i.id < task.id && i.status === task.status);
+
+    if (selectedTask.length === 0) return;
+    const NewID = Math.max(...selectedTask.map(o => o.id));
 
     setTodo(todo.map((todo) => 
-      todo.id === task ? { ...todo, id: task-1 } : todo.id === task-1 ? { ...todo, id: task } : todo
+      todo.id === task.id ? { ...todo, id: NewID } : todo.id === NewID ? { ...todo, id: task.id } : todo
     ));
   }
 
   function moveDown(task) {
-    if (task === todo.length) return; // Can't move down the last item
+    const selectedTask = todo.filter(i => i.id > task.id && i.status === task.status);
+
+    if (selectedTask.length === 0) return;
+    const NewID = Math.min(...selectedTask.map(o => o.id));
 
     setTodo(todo.map((todo) => 
-      todo.id === task ? { ...todo, id: task+1 } : todo.id === task+1 ? { ...todo, id: task } : todo
+      todo.id === task.id ? { ...todo, id: NewID } : todo.id === NewID ? { ...todo, id: task.id } : todo
     ));
   }
 
   return (
-    <TasksContext.Provider value={{ todo, addTodo, setTodo, toggleTodo, moveUp, moveDown }}>
+    <TasksContext.Provider value={{ todo, addTodo, setTodo, toggleTodo, moveUp, moveDown, deleteTask }}>
       {children}
     </TasksContext.Provider>
   );
