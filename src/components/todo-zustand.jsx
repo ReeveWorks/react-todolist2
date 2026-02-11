@@ -10,6 +10,7 @@ function TodoListZustand() {
   /* Zustand Store Option 1*/
   const tasks = useTodosStore((state) => state.tasks);
   const setTasks = useTodosStore((state) => state.setTasks);
+  const addTodo = useTodosStore((state) => state.addTodo);
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -27,13 +28,11 @@ function TodoListZustand() {
     if (item.trim() === "") return;
     if (weight == 0) return;
 
-    setTasks([...tasks,
-    {
-      id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
+    addTodo({
       task: item,
-      weight: Number(weight), 
-      status: false
-    }]);
+      weight: Number(weight)
+    });
+
     setItem("");
     setWeight(0);
   }
@@ -77,7 +76,8 @@ function TodoListZustand() {
                 <li key={task.id}>
                   <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
-
+                  
+                  <b>{task.id}&nbsp;</b>
                   <button onClick={() => toggleStatus(task.id)}>✓</button>
                   <button onClick={() => deleteTask(task.id)}>✕</button>
                 </li>
@@ -93,7 +93,8 @@ function TodoListZustand() {
                 <li key={task.id}>
                   <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
-
+                  
+                  <b>{task.id}&nbsp;</b>
                   <button onClick={() => toggleStatus(task.id)}>↺</button>
                   <button onClick={() => deleteTask(task.id)}>✕</button>
                 </li>
