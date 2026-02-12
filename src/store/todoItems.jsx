@@ -7,6 +7,7 @@ const useTodosStore = create((set) => ({
     { id: 3, task: "Build a App", weight: 6, status: false },
     { id: 4, task: "Procrastinating", weight: 1, status: true },
   ],
+
   addTodo: (newTask) => set((state) => ({
     tasks: [...state.tasks, {
       id: Math.max(...state.tasks.map(o => o.id)) + 1,
@@ -15,7 +16,16 @@ const useTodosStore = create((set) => ({
       status: false
     }],
   })),
+  
   setTasks: (newTasks) => set({ tasks: newTasks }),
+
+  deleteTask: (index) => set((state) => ({
+    tasks: state.tasks.filter(t => t.id !== index)
+  })),
+
+  toggleStatus: (index) => set((state) => ({
+    tasks: state.tasks.map(t => t.id === index ? {...t, status: !t.status} : t)
+  })),
 }));
 
 export { useTodosStore };

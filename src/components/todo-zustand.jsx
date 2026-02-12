@@ -11,6 +11,8 @@ function TodoListZustand() {
   const tasks = useTodosStore((state) => state.tasks);
   const setTasks = useTodosStore((state) => state.setTasks);
   const addTodo = useTodosStore((state) => state.addTodo);
+  const deleteTodo = useTodosStore((state) => state.deleteTask);
+  const toggleTodo = useTodosStore((state) => state.toggleStatus);
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -28,22 +30,10 @@ function TodoListZustand() {
     if (item.trim() === "") return;
     if (weight == 0) return;
 
-    addTodo({
-      task: item,
-      weight: Number(weight)
-    });
+    addTodo({ task: item, weight: Number(weight) });
 
     setItem("");
     setWeight(0);
-  }
-
-  function deleteTask(index) {
-    const newTasks = tasks.filter(t => t.id !== index);
-    setTasks(newTasks);
-  }
-
-  function toggleStatus(index) {
-    setTasks(tasks.map(t => t.id === index ? {...t, status: !t.status} : t));
   }
 
   return (
@@ -78,8 +68,8 @@ function TodoListZustand() {
                   <span>{task.task}</span>
                   
                   <b>{task.id}&nbsp;</b>
-                  <button onClick={() => toggleStatus(task.id)}>✓</button>
-                  <button onClick={() => deleteTask(task.id)}>✕</button>
+                  <button onClick={() => toggleTodo(task.id)}>✓</button>
+                  <button onClick={() => deleteTodo(task.id)}>✕</button>
                 </li>
               ))
           }
@@ -95,8 +85,8 @@ function TodoListZustand() {
                   <span>{task.task}</span>
                   
                   <b>{task.id}&nbsp;</b>
-                  <button onClick={() => toggleStatus(task.id)}>↺</button>
-                  <button onClick={() => deleteTask(task.id)}>✕</button>
+                  <button onClick={() => toggleTodo(task.id)}>↺</button>
+                  <button onClick={() => deleteTodo(task.id)}>✕</button>
                 </li>
               ))
           }
