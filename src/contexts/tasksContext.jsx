@@ -13,7 +13,12 @@ export const TasksProvider = ({ children }) => {
   ]);
 
   function addTodo(task) {
-    todo.push({ id: Math.max(...todo.map(o => o.id)) + 1, task, status: false });
+    const newID = todo.length > 0 ? Math.max(...todo.map(o => o.id)) + 1 : 1;
+
+    todo.push({ 
+      id: newID, 
+      task, 
+      status: false });
   }
 
   function deleteTask(task) {

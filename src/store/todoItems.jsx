@@ -10,7 +10,7 @@ const useTodosStore = create((set) => ({
 
   addTodo: (newTask) => set((state) => ({
     tasks: [...state.tasks, {
-      id: Math.max(...state.tasks.map(o => o.id)) + 1,
+      id: state.tasks.length > 0 ? Math.max(...state.tasks.map(o => o.id)) + 1 : 1,
       task: newTask.task,
       weight: newTask.weight,
       status: false

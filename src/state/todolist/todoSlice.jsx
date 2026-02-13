@@ -16,7 +16,7 @@ const todoSlice = createSlice({
   reducers: {
     addtask : (state, action) => {
       const newtask = {
-        id: state.todos[state.todos.length - 1] + 1,
+        id: state.todos.length > 0 ? Math.max(...state.todos.map(o => o.id)) + 1 : 1,
         task: action.payload.task,
         weight: action.payload.weight,
         status: false
