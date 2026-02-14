@@ -7,8 +7,6 @@ const usePageStore = create((set) => ({
     },
 
     selectPage: (pageSelected) => set({ page: {selected: pageSelected} }),
-        
-    setTasks: (newTasks) => set({ tasks: newTasks }),
 }));
 
 export { usePageStore };

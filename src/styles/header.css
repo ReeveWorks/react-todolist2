@@ -1,6 +1,4 @@
 
-
-
 li{
     justify-content: center;
     display: flex;
@@ -28,4 +26,12 @@ h1{
     text-align: center;
     font-size: 1.5rem;
     color: var(--main-color);
+}
+
+img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+
 }
