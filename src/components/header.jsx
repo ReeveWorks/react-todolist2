@@ -2,6 +2,7 @@ import '../styles/global.css'
 import '../styles/header.css'
 import { usePageStore } from '../store/pageStore.jsx';
 import { useModeStore } from '../store/modeStore.jsx';
+import { useEffect } from 'react';
 
 function header() {
   const page = usePageStore((state) => state.page);
@@ -9,6 +10,11 @@ function header() {
 
   const mode = useModeStore((state) => state.mode);
   const setMode = useModeStore((state) => state.setMode);
+  const darkModeMql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+  useEffect(() => {
+    setMode(darkModeMql.matches);
+  },[]);
 
   function toggleMode() {
     setMode(!mode.state);

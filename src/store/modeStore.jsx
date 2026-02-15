@@ -8,7 +8,18 @@ const useModeStore = create((set) => ({
         img: darkModeIcon,
     },
 
-    setMode: (toggle) => set((i) => ({ mode: {state: toggle, img: toggle ? darkModeIcon : lightkModeIcon} })),
+    setMode: (toggle) => {
+        const root = document.documentElement;
+        if (toggle) {
+            root.classList.remove('light');
+            root.classList.add('dark');
+        } 
+        else {
+            root.classList.remove('dark');
+            root.classList.add('light');
+        }
+        set((i) => ({ mode: {state: toggle, img: toggle ? darkModeIcon : lightkModeIcon} }))
+    },
 }));
 
 export { useModeStore };
