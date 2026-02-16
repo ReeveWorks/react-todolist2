@@ -15,13 +15,24 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     addtask : (state, action) => {
-      state.todos.push(action.payload);
+      const newtask = {
+        id: state.todos.length > 0 ? Math.max(...state.todos.map(o => o.id)) + 1 : 1,
+        task: action.payload.task,
+        weight: action.payload.weight,
+        status: false
+      }
+      state.todos.push(newtask);
     },
     deletetask : (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    },
+    toggletask : (state, action) => {
+      state.todos = state.todos.map((todo) => 
+        todo.id === action.payload ? { ...todo, status: !todo.status } : todo
+      );
     }
   }
 });
-
-export const { addtask, deletetask } = todoSlice.actions;
+//setTasks(tasks.map(t => t.id === index ? {...t, status: !t.status} : t));
+export const { addtask, deletetask, toggletask } = todoSlice.actions;
 export default todoSlice.reducer;

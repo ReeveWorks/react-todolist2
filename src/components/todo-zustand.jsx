@@ -3,13 +3,16 @@ import '../styles/todolist.css'
 import { useState } from 'react';
 import { useTodosStore } from '../store/todoItems.jsx';
 
-function todolistZustand() {
+function TodoListZustand() {
   const [item, setItem] = useState("");
   const [weight, setWeight] = useState(0);
 
   /* Zustand Store Option 1*/
   const tasks = useTodosStore((state) => state.tasks);
   const setTasks = useTodosStore((state) => state.setTasks);
+  const addTodo = useTodosStore((state) => state.addTodo);
+  const deleteTodo = useTodosStore((state) => state.deleteTask);
+  const toggleTodo = useTodosStore((state) => state.toggleStatus);
 
   function InputChange(event) {
     setItem(event.target.value);
@@ -27,24 +30,10 @@ function todolistZustand() {
     if (item.trim() === "") return;
     if (weight == 0) return;
 
-    setTasks([...tasks,
-    {
-      id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
-      task: item,
-      weight: Number(weight), 
-      status: false
-    }]);
+    addTodo({ task: item, weight: Number(weight) });
+
     setItem("");
     setWeight(0);
-  }
-
-  function deleteTask(index) {
-    const newTasks = tasks.filter(t => t.id !== index);
-    setTasks(newTasks);
-  }
-
-  function toggleStatus(index) {
-    setTasks(tasks.map(t => t.id === index ? {...t, status: !t.status} : t));
   }
 
   return (
@@ -77,9 +66,10 @@ function todolistZustand() {
                 <li key={task.id}>
                   <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
-
-                  <button onClick={() => toggleStatus(task.id)}>✓</button>
-                  <button onClick={() => deleteTask(task.id)}>✕</button>
+                  
+                  <b>{task.id}&nbsp;</b>
+                  <button onClick={() => toggleTodo(task.id)}>✓</button>
+                  <button onClick={() => deleteTodo(task.id)}>✕</button>
                 </li>
               ))
           }
@@ -93,9 +83,10 @@ function todolistZustand() {
                 <li key={task.id}>
                   <b>{task.weight}&nbsp;</b>
                   <span>{task.task}</span>
-
-                  <button onClick={() => toggleStatus(task.id)}>↺</button>
-                  <button onClick={() => deleteTask(task.id)}>✕</button>
+                  
+                  <b>{task.id}&nbsp;</b>
+                  <button onClick={() => toggleTodo(task.id)}>↺</button>
+                  <button onClick={() => deleteTodo(task.id)}>✕</button>
                 </li>
               ))
           }
@@ -105,4 +96,4 @@ function todolistZustand() {
   )
 }
 
-export default todolistZustand
+export default TodoListZustand
