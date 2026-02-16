@@ -4,6 +4,7 @@ li{
     display: flex;
     margin: 10px 0px;
     padding: 10px;
+    align-items: center;
 }
 
 a{
@@ -29,8 +30,8 @@ h1{
 }
 
 img{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     margin-left: 10px;
 }
