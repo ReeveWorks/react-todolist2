@@ -4,6 +4,7 @@
   --background-color: rgb(36, 36, 36);
   --secondary-color: rgb(15, 13, 20);
   --hover-color: rgb(116, 123, 255);
+  --button-color: #6B6B6B;
 }
 
 html.light {
@@ -12,6 +13,7 @@ html.light {
   --background-color: rgb(255, 255, 255);
   --secondary-color: rgb(221, 208, 255);
   --hover-color: rgb(116, 123, 255);
+  --button-color: #F0F0F0;
 }
 
 /* :root {
